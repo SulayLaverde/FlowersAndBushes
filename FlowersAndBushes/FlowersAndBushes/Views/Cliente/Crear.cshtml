@@ -7,8 +7,9 @@
 <div class="panel panel-primary">
     <div class="panel-heading"> Registro de Clientes</div>
     <div class="panel-body">
+        <div id="alert_placeholder"></div>
 
-        <form role="form">
+        <form id= "Formulario" role="form">
 
             <table class="table table-striped">
                 <tr>
@@ -22,7 +23,7 @@
                     </td>
                     <td>Número de documento</td>
                     <td>
-                        <input type="text" class="form-control" id="númeroDocumento" />
+                        <input type="text" class="numero form-control"  id="numeroDocumento" />
                     </td>
 
                 </tr>
@@ -61,10 +62,10 @@
 
                 <tr>                    
                     <td>Teléfono Celular</td>
-                    <td><input type="text" class="form-control" id="telefonoCelular" /></td>
+                    <td><input type="text" class="numero form-control" id="telefonoCelular" /></td>
 
                     <td>Teléfono Fijo</td>
-                    <td><input type="text" class="form-control" id="telefonoFijo" /></td>
+                    <td><input type="text" class="numero form-control"  id="telefonoFijo" /></td>
                 </tr>
                 <tr>
                     <td colspan="4" align="right">
@@ -83,5 +84,26 @@
         format: "dd/mm/yyyy",
         todayHighlight: true
     });
+
+    $('.numero').keyup(function(){
+        this.value =this.value.replace(/[^0-9\.]/g,'');
+    });
+
+    $('#Formulario').submit(function (evt) {
+        if ($('#numeroDocumento').val().length < 6)
+            bootstrap_alert.warning('El número de documento debe tener mínimo 6 dígitos')
+        {
+            alert('');
+            return false;
+        }
+    });
+
+    bootstrap_alert = function () { };
+    bootstrap_alert.warning = function (message) {
+        $('#alert_placeholder').
+        html('<div class="alert alert-danger">' +
+        '<a class="close" data-dismiss="alert">x</a><span>'
+        + message + '</span></div>');
+    };
 
 </script>
