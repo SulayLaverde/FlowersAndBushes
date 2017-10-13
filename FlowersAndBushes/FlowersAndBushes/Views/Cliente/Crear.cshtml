@@ -1,7 +1,13 @@
 ﻿@{
     ViewBag.Title = "Crear";
+    Layout = "";
 }
 
+@Styles.Render("~/Content/css")
+<link rel="stylesheet" href="~/Content/Estilos.css" />
+<link rel="stylesheet" href="~/Content/bootstrap-datepicker.min.css" />
+<script type="text/javascript" src="~/scripts/jquery-3.2.1.min.js"> </script>
+<script type="text/javascript" src="~/scripts/bootstrap-datepicker.min.js"> </script>
 <br />
 
 <div class="panel panel-primary">
@@ -9,7 +15,7 @@
     <div class="panel-body">
         <div id="alert_placeholder"></div>
 
-        <form id= "Formulario" role="form">
+        <form id= "Formulario" role="form" action="/Home/About">
 
             <table class="table table-striped">
                 <tr>
@@ -41,9 +47,9 @@
                 </tr>
                 <tr>
                     <td>Contraseña</td>
-                    <td><input type="password" class="form-control" id="Contraseña" />
+                    <td><input type="password" class="form-control" id="password" />
                     <td>Confirmar Contraseña</td>
-                    <td><input type="password" class="form-control" id="confirmarContraseña" /></td>
+                    <td><input type="password" class="form-control" id="comfirmation_password" /></td>
 
 
                 </tr>
@@ -90,10 +96,14 @@
     });
 
     $('#Formulario').submit(function (evt) {
-        if ($('#numeroDocumento').val().length < 6)
-            bootstrap_alert.warning('El número de documento debe tener mínimo 6 dígitos')
+        if ($('#numeroDocumento').val().length < 6)            
         {
-            alert('');
+            bootstrap_alert.warning('El número de documento debe tener mínimo 6 dígitos')
+            return false;
+        }
+
+        if ($('#password').val() != $('#comfirmation_password').val() || $('#password').val().length < 8) {
+            bootstrap_alert.warning('Contraseña Incorrecta');
             return false;
         }
     });
